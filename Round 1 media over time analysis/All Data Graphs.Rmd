@@ -1,0 +1,113 @@
+---
+title: "All Data Graphs"
+author: "Felix Westcott"
+date: "18/11/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(xlsx)
+library(dplyr)
+library(ggpubr)
+library(ggsci)
+library(rstatix)
+library (cowplot)
+
+setwd('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis')
+
+All_Data <- read_excel("All Data.xlsx", sheet = 3)
+
+All_Data$"Treatment Length (days)" <- as.factor(All_Data$"Treatment Length (days)")
+All_Data$"Fat Mix" <- as.factor(All_Data$"Fat Mix")
+
+```
+
+
+``` {r}
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media 3-OHB (umol/g of protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/3-OHB.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media TAG (umol/g of protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/FrTAG.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media ApoB (g/g or protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/FrApoB.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media NEFA (umol/g of protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/NEFA.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media Lactate (mmol/g of protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/Lac.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media Urea (mmol/g of protein)", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/Urea.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "TAG : ApoB Ratio", shape = "Fat Mix", color = "Fat Mix", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/TAG : ApoB Ratio.png')
+
+```
+``` {R}
+
+setwd('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis')
+
+FA_Uptake <- read_excel("All Data.xlsx", sheet = 4)
+
+FA_Uptake$"Fat Mix" <- as.factor(FA_Uptake$"Fat Mix")
+
+ggbarplot(FA_Uptake, x = "Fat Mix", "Fatty Acid Uptake (%)",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Fat Mix", remove = "OPLA = 0") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 100)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA vs POLA/Round 1 media over time analysis/graphs/FA_Uptake.png')
+
+```
+
