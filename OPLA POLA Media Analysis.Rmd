@@ -1,0 +1,93 @@
+---
+title: "OPLA POLA Media Analysis"
+author: "Felix Westcott"
+date: "22/02/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(xlsx)
+library(dplyr)
+library(ggpubr)
+library(ggsci)
+library(rstatix)
+library (cowplot)
+
+setwd('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA')
+
+All_Data <- read_excel("OPLA POLA Media analysis.xlsx", sheet = 3)
+
+All_Data$"Treatment Length (days)" <- as.factor(All_Data$"Treatment Length (days)")
+All_Data$"Media" <- factor(All_Data$"Media", levels = c("Control", "800uL OPLA", "800uL POLA"))
+
+```
+
+
+``` {r}
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media 3-OHB (umol/g of protein)", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/3-OHB.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media TAG (umol/g of protein)", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/FrTAG.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media ApoB (mg/mg of protein)", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/FrApoB.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media Lactate (mmol/g of protein)", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/Lac.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "Media Urea (mmol/g of protein)", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/Urea.png')
+
+ggline(All_Data, x = "Treatment Length (days)", y= "TAG:ApoB Ratio", shape = "Media", color = "Media", add = "mean_se", palette = "npg") +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 14),
+axis.title.y = element_text(color = "grey20", size = 14),
+legend.title = element_text(color = "grey20", size = 12),
+legend.text = element_text(color = "grey20", size = 10))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/TAG_ApoB Ratio.png')
+
+ggbarplot(All_Data, x = "Media", "Fatty acid uptake (%)",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media", remove = "Control") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 100)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/FA_Uptake.png')
+```
