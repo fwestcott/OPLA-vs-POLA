@@ -1,0 +1,132 @@
+---
+title: "OPLA POLA qPCR Summary"
+author: "Felix Westcott"
+date: "25/02/2022"
+output: html_document
+---
+
+```{r setup, include=MediaLSE}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(xlsx)
+library(dplyr)
+library(ggpubr)
+library(ggsci)
+library(rstatix)
+library (cowplot)
+
+qPCR_summary <- read_excel("OPLA POLA qPCR Summary.xlsx", sheet = 2)
+
+qPCR_summary$"Media" <- factor(qPCR_summary$"Media", levels = c("Control", "800uL OPLA", "800uL POLA"))
+
+```
+
+
+``` {r}
+ggbarplot(qPCR_summary, x = "Media", "LC3",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media", ylab = "Relative Expression", title = "LC3") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/LC3.png')
+
+ggbarplot(qPCR_summary, x = "Media", "GABARAP",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media", ylab = "Relative Expression", title = "GABARAP") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.6)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/GABARAP.png')
+
+ggbarplot(qPCR_summary, x = "Media", "P62",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",  ylab = "Relative Expression", title = "p62") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/p62.png')
+
+ggbarplot(qPCR_summary, x = "Media", "ATG5",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",   ylab = "Relative Expression", title = "ATG5") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/ATG5.png')
+
+ggbarplot(qPCR_summary, x = "Media", "ATG7",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",  ylab = "Relative Expression", title = "ATG7") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/ATG7.png')
+
+ggbarplot(qPCR_summary, x = "Media", "ATG10",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",    ylab = "Relative Expression", title = "ATG10") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/ATG10.png')
+
+ggbarplot(qPCR_summary, x = "Media", "JNK1",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",    ylab = "Relative Expression", title = "JNK1") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/JNK1.png')
+
+ggbarplot(qPCR_summary, x = "Media", "JNK2",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",    ylab = "Relative Expression", title = "JNK2") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/JNK2.png')
+
+ggbarplot(qPCR_summary, x = "Media", "NFKB",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media",    ylab = "Relative Expression", title = "NFKB1") +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
+theme(axis.text.x = element_text(color = "grey20", size = 16),
+axis.text.y = element_text(color = "grey20", size = 16),
+axis.title.x = element_text(color = "grey20", size = 18),
+axis.title.y = element_text(color = "grey20", size = 18),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/NFKB1.png')
+
+```
+
+
+``` {R}
+
+for (i in 6:ncol(All_Data)) {
+   formula <- as.formula(paste(colnames(qPCR_summary)[i], " ~ Media*Round", sep=""))
+   model <- aov(formula, data = qPCR_summary)
+
+   cat("\n-----\n\n")
+   cat(colnames(qPCR_summary)[i])
+   cat("\n")
+   print(summary(model))
+}
+```
+
