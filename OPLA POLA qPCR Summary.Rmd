@@ -18,12 +18,13 @@ library (cowplot)
 
 qPCR_summary <- read_excel("OPLA POLA qPCR Summary.xlsx", sheet = 2)
 
-qPCR_summary$"Media" <- factor(qPCR_summary$"Media", levels = c("Control", "800uL OPLA", "800uL POLA"))
+qPCR_summary$"Media" <- factor(qPCR_summary$"Media", levels = c("Control", "800uM OPLA", "800uM POLA"))
 
 ```
 
 
-``` {r}
+``` {r Graphs}
+
 ggbarplot(qPCR_summary, x = "Media", "LC3",
        add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Media", ylab = "Relative Expression", title = "LC3") +
   scale_y_continuous(expand = c(0,0), limits=c(0, 1.5)) +
@@ -117,7 +118,7 @@ ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/grap
 ```
 
 
-``` {R}
+``` {R Stats}
 
 for (i in 6:ncol(All_Data)) {
    formula <- as.formula(paste(colnames(qPCR_summary)[i], " ~ Media*Round", sep=""))
