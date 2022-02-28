@@ -120,7 +120,7 @@ ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/grap
 
 ``` {R Stats}
 
-for (i in 6:ncol(All_Data)) {
+for (i in 9:ncol(qPCR_summary)) {
    formula <- as.formula(paste(colnames(qPCR_summary)[i], " ~ Media*Round", sep=""))
    model <- aov(formula, data = qPCR_summary)
 
