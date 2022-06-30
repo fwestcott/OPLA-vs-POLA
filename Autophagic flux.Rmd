@@ -25,24 +25,44 @@ knitr::opts_chunk$set(echo=TRUE, warning=FALSE, message=FALSE, cache = TRUE)
 
 All_Data <- read_excel("Autophagic flux assay.xlsx", sheet = 3)
 
-All_Data$FA <- as.factor(All_Data$Condition)
+All_Data$Condition <- factor(All_Data$Condition, levels = c("Control", "800uM OPLA", "800uM POLA"))
 
+All_Data2 <- read_excel("Autophagic flux assay.xlsx", sheet = 4)
+All_Data2$Condition <- factor(All_Data2$Condition, levels = c("Control", "800uM OPLA", "800uM POLA"))
+All_Data2$BAF <- as.factor(All_Data2$BAF)
 ```
 
-``` {R Protein}
+``` {R ATG FLX}
 
-pairwise.test = All_Data %>% 
-  t_test(`Autophagic flux` ~ Condition) %>% 
-   adjust_pvalue(method = 'bonferroni')
+res.aov <- aov(`Autophagic flux` ~ Condition*Round, data = All_Data)
+
+summary(res.aov)
+TukeyHSD(res.aov)
 
 ggbarplot(All_Data, x = "Condition", "Autophagic flux",
-       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "FA") +
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", legend = "none", fill = "Condition") +
   scale_y_continuous(expand = c(0,0), limits=c(0, 10)) +
 theme(axis.text.x = element_text(color = "grey20", size = 16),
 axis.text.y = element_text(color = "grey20", size = 16),
 axis.title.x = element_text(color = "grey20", size = 18),
 axis.title.y = element_text(color = "grey20", size = 18))
-ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-LF-vs-HF/graphs/ATG FLX.png')
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/ATG FLX.png')
 
 ```
+``` {r, LC3-II}
+
+
+ggbarplot(All_Data2, x = "Condition", "LC3-II Intensity",
+       add = "mean_se", error.plot = "upper_errorbar", palette = "npg", fill = "BAF", color = "BAF", position = position_dodge(0.9)) +
+  scale_y_continuous(expand = c(0,0), limits=c(0, 2)) +
+theme(axis.text.x = element_text(color = "grey20", size = 12),
+axis.text.y = element_text(color = "grey20", size = 12),
+axis.title.x = element_text(color = "grey20", size = 16),
+axis.title.y = element_text(color = "grey20", size = 16),
+plot.title = element_text(color = "grey20", size = 25, face = "bold", hjust = 0.5))
+ggsave('C:/Users/fwestcott/OneDrive - Nexus365/Desktop/Results/OPLA-vs-POLA/graphs/LC3_II BAF.png')
+
+
+```
+
 
